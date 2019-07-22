@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald|Raleway&display=swap');
+
+$navbar-height: 10vh;
+$num-pages: 3;
+$selector-width: (50 / #{$num-pages});
+
+.App {
+  text-align: center;
+  font-family: Raleway, sans-serif;
+  // margin-top: $navbar-height;
+}
+
+.container {
+  scroll-snap-type: y mandatory;
+}
+
+#home,
+#projects,
+#contact {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+
+  padding: 0px {
+    top: $navbar-height;
+  }
+
+  margin: 0px;
+  // background: blue;
+}
+
+.navbar {
+  position: fixed;
+  background: #333;
+  color: #EFEFEF;
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+  padding: 0px;
+  height: $navbar-height;
+  width: 100vw;
+
+  .selector {
+    position: absolute;
+    width: $selector-width+vw;
+    margin: 0px;
+    padding: 0px;
+    height: 8vh;
+    background: blue;
+    border-radius: 10px;
+    top: 1vh;
+    z-index: -1;
+    transition: 400ms ease-in-out;
+
+  }
+
+  @for $pos from 1 through $num-pages {
+    $x: ((((100 / $num-pages) * ($pos - 1)) + ((100 / $num-pages) / 2))+vw);
+    $offset: $selector-width+vw;
+
+    .selector[data-position="#{$pos}"] {
+      left: calc(#{$x} - (#{$offset} / 2));
+    }
+  }
+
+  ul {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+
+    li {
+      text-align: center;
+      width: 80%;
+      height: 80%;
+
+      a {
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+
+      }
+    }
+  }
+
+  a {
+    color: #EFEFEF;
+    text-decoration: none;
+  }
+}
